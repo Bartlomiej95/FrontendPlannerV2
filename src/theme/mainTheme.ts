@@ -21,7 +21,7 @@ export const theme = {
 
     // ** Headings
     Heading: {
-        mobileFontSize: '28px',
+        mobileFontSize: '26px',
         laptopFontSize: '30px',
         desktopFontSize: '32px',
     },
@@ -30,7 +30,11 @@ export const theme = {
         mobileFontSize: '18px',
         laptopFontSize: '20px',
         desktopFontSize: '22px',
-    }
+    },
 
     // Headings **
+
+    Paragraph: {
+        mobileFontSize: '12px',
+    },
 }
