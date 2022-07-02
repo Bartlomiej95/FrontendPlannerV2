@@ -37,4 +37,10 @@ export const theme = {
     Paragraph: {
         mobileFontSize: '12px',
     },
+
+    NumberParagraph: {
+        mobileFontSize: '50px',
+        mobileFontWeight: 700,
+
+    },
 }
