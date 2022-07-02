@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Header } from "../organisms/Header/Header";
 
 const Wrapper = styled.div`
     width: 100vw;
@@ -10,6 +11,7 @@ const Wrapper = styled.div`
 export const HomePage = () => {
     return(
         <Wrapper>
+            <Header />
             <h1>Strona główna</h1>
         </Wrapper>
     )
