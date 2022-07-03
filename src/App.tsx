@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
 import GlobalStyle from './theme/GlobalStyle';
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from 'styled-components';
 import { HomePage } from './views/HomePage';
-import {theme} from "./theme/mainTheme";
+import { theme } from "./theme/mainTheme";
+import { LoginPage } from './views/LoginPage';
 
 function App() {
 
@@ -13,7 +14,8 @@ function App() {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Routes>
-          <Route path="/" element={<HomePage/>}/>
+            <Route path="/" element={<HomePage/>}/>
+            <Route path="/login" element={<LoginPage />} />
         </Routes>
       </ThemeProvider>
     </>

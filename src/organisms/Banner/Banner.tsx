@@ -1,5 +1,6 @@
 import {SyntheticEvent, useState} from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import {Heading, SubHeading} from "../../components/Heading/Heading";
 import {Button} from "../../components/Button/Button";
 import { data } from "../../data/staticData";
@@ -53,6 +54,7 @@ const SingleNav = styled.div<{ readonly isActive: boolean }>`
 export const Banner = () => {
     // property which save information about id active nav ( nav - i mean active navigation circle )
     const [idActiveNav, setIdActiveNav] = useState(1);
+    const navigate = useNavigate();
 
     const handleClick = (e: SyntheticEvent, id: number) => {
         e.preventDefault();
@@ -71,7 +73,7 @@ export const Banner = () => {
     return(
     <Wrapper>
         <Heading>Zaloguj się lub utwórz konto</Heading>
-        <LoginButton>Zaloguj się </LoginButton>
+        <LoginButton onClick={() => navigate('/login')}>Zaloguj się </LoginButton>
         <SubHeading>Poznaj nasze rozwiązanie</SubHeading>
         <CardWrapper activeId={idActiveNav}>
             {

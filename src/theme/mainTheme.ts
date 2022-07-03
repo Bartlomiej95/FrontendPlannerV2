@@ -34,6 +34,8 @@ export const theme = {
 
     // Headings **
 
+
+    // Paragraphs **
     Paragraph: {
         mobileFontSize: '12px',
     },
@@ -43,4 +45,14 @@ export const theme = {
         mobileFontWeight: 700,
 
     },
+    //** Paragraphs
+
+    //** Inputs
+    Input:{
+        mobileWidth: '300px',
+        mobileHeight: '40px',
+        borderRadius: '20px',
+        mobilePadding: '10px 10px 10px 15px',
+    },
+    // Inputs **
 }
