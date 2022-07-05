@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { HomePage } from './views/HomePage';
 import { theme } from "./theme/mainTheme";
 import { LoginPage } from './views/LoginPage';
+import { UserPage } from './views/UserPage';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/user" element={<UserPage />} />
         </Routes>
       </ThemeProvider>
     </>
