@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Paragraph } from "../../components/Paragraph/Paragraph";
 import userIcon from '../../assets/user.svg';
 import { SubHeading } from "../../components/Heading/Heading";
+import {useSelector} from "react-redux";
 
 const Wrapper = styled.section`
     height: 400px;
@@ -58,14 +59,17 @@ const PositionParagprah = styled(Paragraph)`
 
 
 export const ProfileSection = () => {
+
+    const auth = useSelector((state: any) => state.auth);
+
     return(
         <Wrapper>
             <ProfileParagraph> Pamiętaj, aby po zakończonej pracy <SpanLogout>wylogować się</SpanLogout> z konta </ProfileParagraph>
             <BorderImageUser>
                 <ImageUser icon={userIcon} />
             </BorderImageUser>
-            <NameHeading>Name and Surname</NameHeading>
-            <PositionParagprah></PositionParagprah>
+            <NameHeading>{auth.name} {auth.surname}</NameHeading>
+            <PositionParagprah>{auth.position}</PositionParagprah>
         </Wrapper>
     )
 }
