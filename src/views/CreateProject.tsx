@@ -3,7 +3,7 @@ import { Heading, SubHeading } from "../components/Heading/Heading";
 import { Input } from "../components/Input/Input";
 import { TextArea } from "../components/TextArea/TextArea";
 import { Header } from "../organisms/Header/Header";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {ProjectItem} from "../../../planner/src/project/project.schema";
 import {SyntheticEvent, useEffect, useState} from "react";
 import { Button } from "../components/Button/Button";
@@ -60,13 +60,14 @@ export const CreateProject = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const isEdited: boolean  = (location as LocationState).state.isEdited;
+    const navigate = useNavigate();
     const [projectData, setProjectData] = useState<InitialProjectData>(initialProjectData);
     const [status, setStatus] = useState(false);
-    const [activeDepartments, setActiveDepartments] = useState<DepartmentItem[] | []>([]);
     const [ idUsersAssignToProject, setIdUsersAssignToProject] = useState<Array<string>>([]);
     const departments = useSelector((state: any) => state.departments);
     const users = useSelector((state: any) => state.users);
-    console.log('projectData', projectData);
+
+
     useEffect(() => {
         dispatch(fetchAllDepartments());
         dispatch(fetchAllUsers());
@@ -109,7 +110,7 @@ export const CreateProject = () => {
 
         try {
             console.log(idUsersAssignToProject);
-            dispatch(createNewProject(projectData, idUsersAssignToProject));
+            dispatch(createNewProject(projectData, idUsersAssignToProject, navigate));
         } catch (e) {
 
         }

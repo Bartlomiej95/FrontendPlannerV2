@@ -23,9 +23,10 @@ export const getAllProjects = () => async (dispatch: Dispatch) => {
     }
 }
 
-export const createNewProject = (projectData: ProjectItem, usersId: string) => async (dispatch: Dispatch) => {
+export const createNewProject = (projectData: ProjectItem, usersId: string, navigate: any) => async (dispatch: Dispatch) => {
     try {
         const { data } = await api.createNewProject(projectData, usersId);
+        navigate('/user');
         console.log(data);
     }catch (e) {
         console.error(e);
