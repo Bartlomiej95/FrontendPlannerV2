@@ -1,6 +1,6 @@
 import {ProjectsConst} from "./constants";
-import {ProjectItem} from "../../../../planner/src/project/project.entity";
-import {TaskItem} from "../../../../planner/src/task/task.entity";
+import {ProjectItem} from "../../../../planner/src/project/project.schema";
+import {TaskItem} from "../../../../planner/src/task/task.schema";
 
 
 interface ActionFetchAllProjects {

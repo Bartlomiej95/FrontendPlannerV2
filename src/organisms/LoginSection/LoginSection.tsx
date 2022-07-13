@@ -4,7 +4,7 @@ import { Heading } from "../../components/Heading/Heading";
 import { Paragraph } from "../../components/Paragraph/Paragraph";
 import { Button } from "../../components/Button/Button";
 import { Input } from "../../components/Input/Input";
-import {UserItem} from "../../../../planner/src/user/user.entity";
+import {UserItem} from "../../../../planner/src/user/user.schema";
 import {useDispatch} from "react-redux";
 import {fetchAllUsers, loginUser} from "../../store/Users/actions";
 import {useNavigate} from "react-router-dom";

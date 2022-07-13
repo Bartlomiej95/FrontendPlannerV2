@@ -1,4 +1,4 @@
-import {UserItem} from "../../../../planner/src/user/user.entity";
+import {UserItem} from "../../../../planner/src/user/user.schema";
 import * as api from '../../api/index';
 import { UsersConst } from "./constants";
 import {Dispatch} from "redux";

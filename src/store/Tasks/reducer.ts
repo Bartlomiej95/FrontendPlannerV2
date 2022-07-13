@@ -1,4 +1,4 @@
-import {TaskItem} from "../../../../planner/src/task/task.entity";
+import {TaskItem} from "../../../../planner/src/task/task.schema";
 import {TasksConst} from "./constants";
 
 export const tasks = (tasks: TaskItem, action: any) => {

@@ -1,5 +1,5 @@
 import {ProjectsConst} from "./constants";
-import {ProjectItem} from "../../../../planner/src/project/project.entity";
+import {ProjectItem} from "../../../../planner/src/project/project.schema";
 import {ActionsProjects} from "./actionCreator";
 
 

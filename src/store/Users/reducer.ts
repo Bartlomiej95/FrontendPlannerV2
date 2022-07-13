@@ -1,4 +1,4 @@
-import { UserItem } from "../../../../planner/src/user/user.entity";
+import { UserItem } from "../../../../planner/src/user/user.schema";
 import {UsersConst} from "./constants";
 
 

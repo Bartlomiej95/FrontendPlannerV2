@@ -6,8 +6,10 @@ import {Paragraph} from "../../components/Paragraph/Paragraph";
 import {MainSectionType} from "../../utils/enums/main-section";
 import {InnerMainSectionNav} from "../../molecules/InnerMainSectionNav/InnerMainSectionNav";
 import {getProjectsForLoggedUser} from "../../store/Projects/actions";
-import {ProjectItem} from "../../../../planner/src/project/project.entity";
+import {ProjectItem} from "../../../../planner/src/project/project.schema";
 import {ProjectCard} from "../../molecules/ProjectCard/ProjectCard";
+import {useNavigate} from "react-router-dom";
+import { Button } from "../../components/Button/Button";
 
 const Wrapper = styled.main`
     min-height: 100vh;
@@ -45,12 +47,18 @@ const SubHeadingHelpdesk = styled(SubHeading)`
     color: black;
 `;
 
+const BtnCreateProject = styled(Button)`
+    width: 214px;
+    margin-bottom: 45px;
+`;
+
 export const MainSection = () => {
 
     const auth = useSelector((state: any) => state.auth);
     const [typeOfMainSection, setTypeOfMainSection] = useState(MainSectionType.Project);
     const dispatch = useDispatch();
     const projects = useSelector((state: any) => state.projects.projects);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if(typeOfMainSection === MainSectionType.ProjectManager){
@@ -76,6 +84,15 @@ export const MainSection = () => {
                                 />
                             )
                         }
+                    </WrapperProjectCard>
+                )
+            }
+            {
+                ( auth.role === "FOUNDER" || auth.role === "ADMIN") && (typeOfMainSection === MainSectionType.ProjectManager) && (
+                    <WrapperProjectCard>
+                        <BtnCreateProject onClick={() => navigate('/project/add', { state: { isEdited: false }})} >
+                            Dodaj nowy projekt
+                        </BtnCreateProject>
                     </WrapperProjectCard>
                 )
             }
