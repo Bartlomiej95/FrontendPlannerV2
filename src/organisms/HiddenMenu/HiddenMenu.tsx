@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { SubHeading } from "../../components/Heading/Heading";
 import {useNavigate} from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { logoutUser } from "../../store/Users/actions";
 
 const Wrapper = styled.div`
     display: flex;
@@ -69,8 +70,8 @@ export const HiddenMenu = ({ isActive, exitHiddenMenu } :Props) => {
     const dispatch = useDispatch();
 
     const handleLogoutClick = () => {
-        navigate('/logout');
-        dispatch(logoutUser());
+
+        dispatch(logoutUser(navigate));
     }
 
     return(

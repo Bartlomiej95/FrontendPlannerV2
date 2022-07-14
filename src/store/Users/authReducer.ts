@@ -5,7 +5,7 @@ export const authReducer = ( auth = {}, action: any) => {
         case UsersConst.LOGIN_USER:
             return action.payload.user;
         case UsersConst.LOGOUT_USER:
-            return action.payload;
+            return {};
         default:
             return auth;
     }

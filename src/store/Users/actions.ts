@@ -39,3 +39,13 @@ export const registerUser = (newUser: RegisterDto, navigate: any) => async (disp
         console.log(e)
     }
 }
+
+export const logoutUser = (navigate: any) => async (dispatch: Dispatch<ActionsUsers>) => {
+    try {
+        const { data } = await api.logoutUser();
+        dispatch({ type: UsersConst.LOGOUT_USER, payload: data});
+        navigate('/logout');
+    } catch (error) {
+
+    }
+}
