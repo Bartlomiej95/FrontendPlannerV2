@@ -1,5 +1,9 @@
+import { useState } from "react";
 import styled, { css } from "styled-components";
 import menuIcon from '../../assets/menuIcon.svg';
+import { Button } from "../../components/Button/Button";
+import { HiddenMenu } from "../HiddenMenu/HiddenMenu";
+import {useNavigate} from "react-router-dom";
 
 const Wrapper = styled.div`
     height: 50px;
@@ -10,6 +14,20 @@ const Wrapper = styled.div`
     align-items: center;
     padding: 0 33px;
     background-color: #F9FAFF;
+`;
+
+const Logo = styled.h2`
+  font-size: ${({ theme }) => theme.SubHeading.mobileFontSize};
+  font-weight: bold;
+  display: block;
+  color: black;
+`;
+
+
+const IconsDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 `;
 
 const Icon = styled.div<{ readonly bcgIcon :string}>`
@@ -28,13 +46,23 @@ const Icon = styled.div<{ readonly bcgIcon :string}>`
     `}
 `;
 
+
+
 export const Header = () => {
+    const [showHiddenMenu, setShowHiddenMenu] = useState(false);
     return(
         <>
-            <Wrapper>
-                <h2>Planner</h2>
-                <Icon bcgIcon={menuIcon}  />
-            </Wrapper>
+            {
+                !showHiddenMenu && (
+                    <Wrapper>
+                        <Logo>Planner</Logo>
+                        <IconsDiv>
+                            <Icon bcgIcon={menuIcon} onClick={() => setShowHiddenMenu(prev => !prev)} />
+                        </IconsDiv>
+                    </Wrapper>
+                )
+            }
+            <HiddenMenu isActive={showHiddenMenu} exitHiddenMenu={() => setShowHiddenMenu(false)}/>
         </>
     );
 }

@@ -62,7 +62,7 @@ export const MainSection = () => {
 
     useEffect(() => {
         if(typeOfMainSection === MainSectionType.ProjectManager){
-            dispatch(getProjectsForLoggedUser(auth.id));
+            dispatch(getProjectsForLoggedUser(auth._id));
         }
     }, [typeOfMainSection])
 
