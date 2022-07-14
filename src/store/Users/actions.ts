@@ -3,6 +3,7 @@ import * as api from '../../api/index';
 import { UsersConst } from "./constants";
 import {Dispatch} from "redux";
 import {ActionsUsers} from "./actionCreator";
+import {RegisterDto} from "../../../../planner/src/user/dto/register.dto";
 
 type LoginUserData = Omit<UserItem, 'email' | 'password'>
 
@@ -24,5 +25,17 @@ export const fetchAllUsers = () => async (dispatch: Dispatch) => {
         dispatch({ type: UsersConst.FETCH_ALL_USERS, payload: data})
     } catch (error) {
         console.log(error)
+    }
+}
+
+export const registerUser = (newUser: RegisterDto, navigate: any) => async (dispatch: Dispatch) => {
+    try {
+        const { data } = await api.registerUser(newUser);
+        console.log(newUser);
+        dispatch({ type: UsersConst.CREATE_USER, payload: data});
+        navigate('/');
+
+    } catch (e) {
+        console.log(e)
     }
 }

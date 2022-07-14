@@ -3,6 +3,9 @@ import { Input } from "../../components/Input/Input";
 import {SyntheticEvent, useState} from "react";
 import { Button } from "../../components/Button/Button";
 import {RegisterDto} from "../../../../planner/src/user/dto/register.dto";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {registerUser} from "../../store/Users/actions";
 
 
 const Form = styled.form`
@@ -30,6 +33,8 @@ export const RegisterForm = () => {
         email: '',
         password: '',
     });
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleChange = (e:SyntheticEvent) => {
         e.preventDefault();
@@ -42,6 +47,11 @@ export const RegisterForm = () => {
 
     const handleSubmit = (e: SyntheticEvent) => {
         e.preventDefault();
+        try {
+            dispatch(registerUser(registerUserData, navigate))
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     return(
