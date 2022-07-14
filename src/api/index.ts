@@ -23,4 +23,4 @@ export const getProjectsForLoggedUser = (userId: string) => axios.get(`${urlProj
 export const getTasksForUser = (userId: string) => axios.get(`${urlTasks}/`);
 export const createNewProject = (projectData: ProjectItem, usersId: string) => axios.post(`${urlProjects}/add`, { projectData, usersId });
 export const registerUser = (newUser: RegisterDto) => axios.post(`${urlUser}/register`, newUser );
-export const logoutUser = () => axios.get(`${domain}/logout`);
+export const logoutUser = () => axios.get(`${urlAuth}/logout`);

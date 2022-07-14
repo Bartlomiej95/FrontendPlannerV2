@@ -9,6 +9,7 @@ import { LoginPage } from './views/LoginPage';
 import { UserPage } from './views/UserPage';
 import { CreateProject } from './views/CreateProject';
 import {RegisterPage} from "./views/RegisterPage";
+import {LogoutPage} from "./views/LogoutPage";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/user" element={<UserPage />} />
             <Route path="/project/add" element={<CreateProject />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/logout" element={<LogoutPage />} />
         </Routes>
       </ThemeProvider>
     </>

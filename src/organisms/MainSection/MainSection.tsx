@@ -61,7 +61,11 @@ export const MainSection = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(typeOfMainSection === MainSectionType.ProjectManager){
+        dispatch(getProjectsForLoggedUser(auth._id));
+    },[])
+
+    useEffect(() => {
+        if(typeOfMainSection === MainSectionType.Project){
             dispatch(getProjectsForLoggedUser(auth._id));
         }
     }, [typeOfMainSection])
@@ -87,6 +91,7 @@ export const MainSection = () => {
                     </WrapperProjectCard>
                 )
             }
+
             {
                 ( auth.role === "FOUNDER" || auth.role === "ADMIN") && (typeOfMainSection === MainSectionType.ProjectManager) && (
                     <WrapperProjectCard>
