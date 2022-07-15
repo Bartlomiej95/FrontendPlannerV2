@@ -10,6 +10,7 @@ import { UserPage } from './views/UserPage';
 import { CreateProject } from './views/CreateProject';
 import {RegisterPage} from "./views/RegisterPage";
 import {LogoutPage} from "./views/LogoutPage";
+import { TasksToProject } from './views/TasksToProject';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="/project/add" element={<CreateProject />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/logout" element={<LogoutPage />} />
+            <Route path="/task/add" element={<TasksToProject />} />
         </Routes>
       </ThemeProvider>
     </>

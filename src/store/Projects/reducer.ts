@@ -25,6 +25,11 @@ export const projects = (state: ProjectsState = initialState, action: ActionsPro
                 ...state,
                 projects: action.payload,
             }
+        case ProjectsConst.GET_DETAILS_PROJECT:
+            return {
+                ...state,
+                detailsProjects: action.payload
+            }
         default:
             return initialState;
     }

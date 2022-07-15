@@ -70,14 +70,13 @@ interface Props {
     isFromEdition: boolean,
 }
 
-export const PersonToProject = ({id, name, surname, position, assignUserToProject, isFromEdition}: Props) => {
+export const PersonToProject = ({id, name, surname, position, assignUserToProject}: Props) => {
 
     const [ isAccept, setIsAccept ] = useState(false);
 
     const handleClick = () => {
         setIsAccept(prev => !prev);
         assignUserToProject(id);
-
     }
 
     return(

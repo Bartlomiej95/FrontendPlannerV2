@@ -1,6 +1,6 @@
 import {UserItem} from "../../../../planner/src/user/user.schema";
 import * as api from '../../api/index';
-import { UsersConst } from "./constants";
+import {UsersConst} from "./constants";
 import {Dispatch} from "redux";
 import {ActionsUsers} from "./actionCreator";
 import {RegisterDto} from "../../../../planner/src/user/dto/register.dto";
@@ -47,5 +47,14 @@ export const logoutUser = (navigate: any) => async (dispatch: Dispatch<ActionsUs
         navigate('/logout');
     } catch (error) {
 
+    }
+}
+
+export const getAllUsersForProject = (projectId: string) => async (dispatch: Dispatch<ActionsUsers>) => {
+    try {
+        const { data } = await api.getAllUsersForProject(projectId);
+        dispatch({ type: UsersConst.FETCH_USERS_FOR_PROJECT, payload: data});
+    } catch (e) {
+        console.log(e);
     }
 }

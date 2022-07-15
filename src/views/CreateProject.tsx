@@ -15,7 +15,7 @@ import {fetchAllUsers} from "../store/Users/actions";
 import {DepartmentItem} from "../../../planner/src/department/department.schema";
 import {UserItem} from "../../../planner/src/user/user.schema";
 import { PersonToProject } from "../molecules/PersonToProject/PersonToProject";
-import {createNewProject} from "../store/Projects/actions";
+import {createNewProject, getProject} from "../store/Projects/actions";
 
 
 const CreateProjectFormDiv = styled.div`
@@ -52,6 +52,7 @@ const initialProjectData: InitialProjectData = {
 interface LocationState {
     state: {
         isEdited: boolean,
+        id: string,
     }
 }
 
@@ -59,18 +60,31 @@ export const CreateProject = () => {
 
     const dispatch = useDispatch();
     const location = useLocation();
-    const isEdited: boolean  = (location as LocationState).state.isEdited;
+    const { isEdited, id }  = (location as LocationState).state;
     const navigate = useNavigate();
     const [projectData, setProjectData] = useState<InitialProjectData>(initialProjectData);
     const [status, setStatus] = useState(false);
     const [ idUsersAssignToProject, setIdUsersAssignToProject] = useState<Array<string>>([]);
+    const [selectedDepartment, setSelectedDepartment] = useState<[string] | []>([]);
     const departments = useSelector((state: any) => state.departments);
     const users = useSelector((state: any) => state.users);
+    const detailsProjectFromEdit = useSelector((state: any) => state.projects.detailsProjects );
 
 
-    useEffect(() => {
-        dispatch(fetchAllDepartments());
-        dispatch(fetchAllUsers());
+    useEffect( () => {
+        if(!isEdited){
+            dispatch(fetchAllDepartments());
+            dispatch(fetchAllUsers());
+        }
+
+
+        if((location as LocationState).state.isEdited){
+            console.log('hestem tutaj')
+            dispatch(getProject(id))
+            setProjectData(detailsProjectFromEdit);
+            setSelectedDepartment(detailsProjectFromEdit.departments)
+            setIdUsersAssignToProject(detailsProjectFromEdit.users);
+        }
 
     },[])
 
@@ -84,6 +98,7 @@ export const CreateProject = () => {
             [name]: target.value,
         })
     }
+    console.log(projectData);
 
     const handleAssignIdUserToProject = (id: string) => {
         console.log(id);
@@ -109,8 +124,7 @@ export const CreateProject = () => {
         e.preventDefault();
 
         try {
-            console.log(idUsersAssignToProject);
-            dispatch(createNewProject(projectData, idUsersAssignToProject, navigate));
+            dispatch(createNewProject(projectData, idUsersAssignToProject, selectedDepartmentsNames, navigate));
         } catch (e) {
 
         }
@@ -118,10 +132,12 @@ export const CreateProject = () => {
     }
 
     const selectedDepartmentsNames = departments.map((dep: DepartmentItem )=> {
-        if(dep.isSelected){
+        if(dep.isActive){
             return dep.name
         }
     }).filter(Boolean) // I want remove every "undefined" from the array
+
+
 
     const usersFromSelectedDepartments = users.filter((user: UserItem) => {
         if(user.department){
@@ -130,6 +146,7 @@ export const CreateProject = () => {
             }
         }
     });
+
 
     return(
         <>

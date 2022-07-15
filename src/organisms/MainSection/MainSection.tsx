@@ -5,11 +5,13 @@ import {SubHeading} from "../../components/Heading/Heading";
 import {Paragraph} from "../../components/Paragraph/Paragraph";
 import {MainSectionType} from "../../utils/enums/main-section";
 import {InnerMainSectionNav} from "../../molecules/InnerMainSectionNav/InnerMainSectionNav";
-import {getProjectsForLoggedUser} from "../../store/Projects/actions";
+import {getAllProjects, getProjectsForLoggedUser} from "../../store/Projects/actions";
 import {ProjectItem} from "../../../../planner/src/project/project.schema";
 import {ProjectCard} from "../../molecules/ProjectCard/ProjectCard";
 import {useNavigate} from "react-router-dom";
-import { Button } from "../../components/Button/Button";
+import {Button} from "../../components/Button/Button";
+import {TasksSection} from "../TasksSection/TasksSection";
+import {ProjectDetailsCard} from "../../molecules/ProjectDetailsCard/ProjectDetailsCard";
 
 const Wrapper = styled.main`
     min-height: 100vh;
@@ -52,10 +54,17 @@ const BtnCreateProject = styled(Button)`
     margin-bottom: 45px;
 `;
 
+const BtnLoadMore = styled(Button)`
+    display: block;
+    margin: 50px auto;
+    width: 150px;
+`;
+
 export const MainSection = () => {
 
     const auth = useSelector((state: any) => state.auth);
     const [typeOfMainSection, setTypeOfMainSection] = useState(MainSectionType.Project);
+    const [counterClickLoadMore, setCounterClickLoadMore] = useState(0);
     const dispatch = useDispatch();
     const projects = useSelector((state: any) => state.projects.projects);
     const navigate = useNavigate();
@@ -67,8 +76,15 @@ export const MainSection = () => {
     useEffect(() => {
         if(typeOfMainSection === MainSectionType.Project){
             dispatch(getProjectsForLoggedUser(auth._id));
+        } else if (typeOfMainSection === MainSectionType.ProjectManager){
+            dispatch(getAllProjects());
         }
     }, [typeOfMainSection])
+
+    let numberOfProjectOnTheOneLoad = 5;
+    let numberOfLoadedProjectsAtTheBeggining = 3;
+    let numberOfProjects = numberOfLoadedProjectsAtTheBeggining + numberOfProjectOnTheOneLoad * counterClickLoadMore;
+    const projectsDivide = projects.slice(0,numberOfProjects);
 
     return(
         <Wrapper>
@@ -91,13 +107,42 @@ export const MainSection = () => {
                     </WrapperProjectCard>
                 )
             }
-
+            {
+                typeOfMainSection === MainSectionType.Archives && (
+                    <WrapperProjectCard>
+                        <SubHeading>Brak projektów w archiwum</SubHeading>
+                    </WrapperProjectCard>
+                )
+            }
+            {
+                typeOfMainSection === MainSectionType.Tasks && (
+                    <WrapperProjectCard>
+                        <TasksSection />
+                    </WrapperProjectCard>
+                )
+            }
             {
                 ( auth.role === "FOUNDER" || auth.role === "ADMIN") && (typeOfMainSection === MainSectionType.ProjectManager) && (
                     <WrapperProjectCard>
                         <BtnCreateProject onClick={() => navigate('/project/add', { state: { isEdited: false }})} >
                             Dodaj nowy projekt
                         </BtnCreateProject>
+                        {
+                            projectsDivide.map((item : any) => (
+                                <ProjectDetailsCard
+                                    key={item._id}
+                                    title={item.title}
+                                    description={item.description}
+                                    id={item._id}
+                                    customer={item.customer}
+                                    users={item.users}
+                                    projectValue={item.projectValue}
+                                    deadline={item.deadline}
+                                    duration={item.duration}
+                                />
+                            ))
+                        }
+                        <BtnLoadMore onClick={() => setCounterClickLoadMore(prev => prev + 1)} > Załaduj więcej </BtnLoadMore>
                     </WrapperProjectCard>
                 )
             }

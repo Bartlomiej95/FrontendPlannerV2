@@ -7,13 +7,13 @@ export const departments = (departments: Array<DepartmentItem> | [] = [] , actio
     switch(action.type){
         case DepartmentsConsts.FETCH_ALL_DEPARTMENTS:
             return [...action.payload].map(item => {
-                item.isSelected = false;
+                item.isActive = false;
                 return item;
             });
         case DepartmentsConsts.ADD_SELECTED:
             return [...departments].map(item => {
                 if(item.name === action.payload.name){
-                    item.isSelected = action.payload.status;
+                    item.isActive = action.payload.status;
                 }
                 return item;
             });;

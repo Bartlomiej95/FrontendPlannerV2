@@ -23,12 +23,21 @@ export const getAllProjects = () => async (dispatch: Dispatch) => {
     }
 }
 
-export const createNewProject = (projectData: ProjectItem, usersId: string, navigate: any) => async (dispatch: Dispatch) => {
+export const createNewProject = (projectData: ProjectItem, usersId: string, selectedDepartmentsNames: [string], navigate: any) => async (dispatch: Dispatch) => {
     try {
-        const { data } = await api.createNewProject(projectData, usersId);
+        const { data } = await api.createNewProject(projectData, usersId, selectedDepartmentsNames);
         navigate('/user');
         console.log(data);
     }catch (e) {
         console.error(e);
+    }
+}
+
+export const getProject = (id: string) => async (dispatch: Dispatch) => {
+    try {
+        const { data } = await api.getProject(id);
+        dispatch({ type: ProjectsConst.GET_DETAILS_PROJECT, payload: data})
+    } catch(e){
+        console.error(e)
     }
 }
